@@ -1,0 +1,33 @@
+---
+title: Pricing
+description: USD wallet, metered usage, and volume tiers.
+---
+
+## Pay as you go
+
+- Wallet balance is in **USD**
+- Each run is metered per model pricing on the model detail page
+- Balance is **pre-held** when a run starts and settled when it completes
+
+## Top up
+
+Add balance in [Console → Billing](https://apisale.ai/console/billing). Packages and custom amounts are supported.
+
+## Volume tiers
+
+Higher lifetime top-ups unlock:
+
+- Consumption discounts (see [Pricing page](https://apisale.ai/pricing))
+- Higher [concurrency limits](/get-started/errors-and-limits)
+
+## Preview pricing
+
+```bash
+curl -X POST "https://api.apisale.ai/v1/pricing/preview" \
+  -H "Authorization: Key $APISALE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model_slug": "fal-ai/flux/dev",
+    "input": { "prompt": "test" }
+  }'
+```

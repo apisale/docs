@@ -1,72 +1,87 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
-  "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
-  },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
+  "name": "apisale",
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#6120EE",
+    "light": "#C8F5EB",
+    "dark": "#6120EE"
+  },
   "navbar": {
     "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
+      { "label": "Explore", "href": "https://apisale.ai/explore" },
+      { "label": "Console", "href": "https://apisale.ai/console" },
+      { "label": "API Keys", "href": "https://apisale.ai/console/api-keys" },
+      { "label": "Pricing", "href": "https://apisale.ai/pricing" }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Get started",
+      "href": "https://apisale.ai/login"
     }
   },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+  "navigation": {
+    "groups": [
+      {
+        "group": "Get Started",
+        "pages": [
+          "introduction",
+          "get-started/quickstart",
+          "get-started/authentication",
+          "get-started/pricing",
+          "get-started/webhooks",
+          "get-started/errors-and-limits",
+          "get-started/account-and-monitoring"
+        ]
+      },
+      {
+        "group": "Model APIs",
+        "pages": [
+          "model-apis/overview",
+          "model-apis/submit-run",
+          "model-apis/poll-runs",
+          "model-apis/openai-compatible"
+        ]
+      },
+      {
+        "group": "API Reference",
+        "openapi": "openapi.json"
+      },
+      {
+        "group": "Platform APIs",
+        "pages": [
+          "platform/account",
+          "platform/console-vs-public"
+        ]
+      },
+      {
+        "group": "Console Guide",
+        "pages": [
+          "console/overview",
+          "console/limits",
+          "console/api-keys",
+          "console/billing"
+        ]
+      },
+      {
+        "group": "SDKs",
+        "pages": ["sdks/overview"]
+      }
     ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+  "api": {
+    "openapi": "openapi.json",
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": ["curl", "python", "javascript", "go"],
+      "autogenerate": true
     }
   }
 }

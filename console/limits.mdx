@@ -1,0 +1,22 @@
+---
+title: Limits & concurrency
+description: View organization and per-key concurrency in the Console.
+---
+
+Open [Console → Limits](https://apisale.ai/console/limits).
+
+## What you see
+
+- **Organization concurrency** — `in_flight / limit` and tier name
+- **Tier table** — starter → scale thresholds
+- **Status breakdown** — queued vs processing
+- **Per API key** — each key's in-flight usage
+
+## API equivalent
+
+```bash
+curl "https://api.apisale.ai/v1/account" \
+  -H "Authorization: Key $APISALE_API_KEY"
+```
+
+See [Account & monitoring](/get-started/account-and-monitoring).

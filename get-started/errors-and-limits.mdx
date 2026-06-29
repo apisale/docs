@@ -1,0 +1,61 @@
+---
+title: Errors & limits
+description: Concurrency tiers, rate limits, and HTTP 429 handling.
+---
+
+apisale enforces three independent limits:
+
+## 1. Organization concurrency
+
+Maximum **parallel runs** per organization (statuses: `pending`, `assigned`, `processing`).
+
+| Tier | Lifetime top-ups | Concurrent runs |
+|------|------------------|-----------------|
+| starter | $0 | 10 |
+| growth | ≥ $350 | 25 |
+| pro | ≥ $1,400 | 50 |
+| scale | ≥ $7,000 | 100 |
+
+When exceeded:
+
+```json
+{
+  "error": {
+    "code": "concurrency_limit_exceeded",
+    "message": "Organization concurrency limit reached (10/10). Tier=starter.",
+    "scope": "organization",
+    "limit": 10,
+    "in_flight": 10
+  }
+}
+```
+
+HTTP **429 Too Many Requests**
+
+## 2. API key concurrency
+
+Each key has `max_concurrency` (default **10**). A single key cannot exceed its own cap even if the org has headroom.
+
+`scope: "api_key"` in the error body.
+
+## 3. Rate limit
+
+Each key has `rate_limit_per_minute` (default **120**). Exceeding it returns:
+
+```json
+{
+  "error": "rate_limit_exceeded",
+  "message": "API key rate limit exceeded (120/minute)"
+}
+```
+
+## Client recommendations
+
+1. Read `X-Concurrency-Remaining` on submit responses
+2. Poll [`GET /v1/account`](/get-started/account-and-monitoring) for proactive backoff
+3. Use exponential backoff on 429
+4. Distribute load across multiple keys only within org policy
+
+## Insufficient balance
+
+Submitting a run with insufficient `available_usd` returns **400** with an insufficient balance message. Top up in the [Console](https://apisale.ai/console/billing).

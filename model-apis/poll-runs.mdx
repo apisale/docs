@@ -1,0 +1,35 @@
+---
+title: Poll & search runs
+description: GET /v1/runs and POST /v1/runs/search
+---
+
+## Get one run
+
+```bash
+curl "https://api.apisale.ai/v1/runs/run_abc123" \
+  -H "Authorization: Key $APISALE_API_KEY"
+```
+
+Public statuses: `queued`, `processing`, `succeeded`, `failed`, `timeout`, `cancelled`.
+
+## Search runs
+
+```bash
+curl -X POST "https://api.apisale.ai/v1/runs/search" \
+  -H "Authorization: Key $APISALE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "page": 1,
+    "limit": 20,
+    "status": ["processing", "queued"]
+  }'
+```
+
+## Cancel
+
+```bash
+curl -X DELETE "https://api.apisale.ai/v1/runs/run_abc123" \
+  -H "Authorization: Key $APISALE_API_KEY"
+```
+
+Cancelling releases the concurrency slot when the run terminates.

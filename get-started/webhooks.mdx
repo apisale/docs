@@ -1,0 +1,23 @@
+---
+title: Webhooks
+description: Receive async run completion callbacks.
+---
+
+## Submit with webhook
+
+```json
+{
+  "input": { "prompt": "..." },
+  "webhook_url": "https://your.app/hooks/apisale"
+}
+```
+
+When the run reaches a terminal state, apisale POSTs the run payload to your URL.
+
+## Verify signatures
+
+Validate `X-Apisale-Signature` using your organization webhook secret from [Console → Webhooks](https://apisale.ai/console/webhooks).
+
+## Retries
+
+Failed deliveries are retried with backoff. Inspect delivery history in the Console.

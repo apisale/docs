@@ -1,0 +1,35 @@
+---
+title: Submit a run
+description: POST /v1/run/{model_slug}
+---
+
+```bash
+curl -X POST "https://api.apisale.ai/v1/run/{model_slug}" \
+  -H "Authorization: Key $APISALE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "input": {
+      "prompt": "A serene mountain lake at dawn"
+    }
+  }'
+```
+
+## Path parameter
+
+`model_slug` — e.g. `fal-ai/flux/dev`. Find slugs on [Explore](https://apisale.ai/explore).
+
+## Response headers
+
+```http
+X-Concurrency-Limit: 10
+X-Concurrency-In-Flight: 4
+X-Concurrency-Remaining: 6
+X-RateLimit-Limit: 120
+X-RateLimit-Remaining: 115
+```
+
+## Errors
+
+- **401** — invalid API key
+- **402/400** — insufficient balance
+- **429** — concurrency or rate limit — see [Errors & limits](/get-started/errors-and-limits)

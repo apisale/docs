@@ -1,0 +1,88 @@
+---
+title: Account & monitoring
+description: Query wallet balance and concurrency with your API key.
+---
+
+## GET /v1/account
+
+Poll account status from your integration using the same API key you use for inference.
+
+```bash
+curl "https://api.apisale.ai/v1/account" \
+  -H "Authorization: Key $APISALE_API_KEY"
+```
+
+### Example response
+
+```json
+{
+  "organization_id": "org_xxx",
+  "api_key_id": "key_xxx",
+  "environment": "live",
+  "wallet": {
+    "balance_usd": "12.500000",
+    "reserved_usd": "0.800000",
+    "available_usd": "11.700000",
+    "total_spent_usd": "48.200000",
+    "currency": "usd"
+  },
+  "concurrency": {
+    "tier": "starter",
+    "mode": "auto",
+    "limit": 10,
+    "in_flight": 3,
+    "available": 7,
+    "utilization": 0.3
+  },
+  "api_key_concurrency": {
+    "limit": 10,
+    "in_flight": 2,
+    "available": 8
+  },
+  "rate_limit": {
+    "per_minute": 120
+  }
+}
+```
+
+### Field guide
+
+| Field | Meaning |
+|-------|---------|
+| `balance_usd` | Total wallet balance |
+| `reserved_usd` | Pre-held for in-progress runs |
+| `available_usd` | `balance - reserved` — spendable now |
+| `concurrency.limit` | Organization parallel run cap |
+| `concurrency.in_flight` | Runs using slots now |
+| `api_key_concurrency` | Limits for the **current** API key |
+
+## GET /v1/account/keys
+
+Per-key concurrency breakdown for all active keys:
+
+```bash
+curl "https://api.apisale.ai/v1/account/keys" \
+  -H "Authorization: Key $APISALE_API_KEY"
+```
+
+## Response headers
+
+Run submit responses may include:
+
+```http
+X-Concurrency-Limit: 10
+X-Concurrency-In-Flight: 3
+X-Concurrency-Remaining: 7
+X-RateLimit-Limit: 120
+X-RateLimit-Remaining: 118
+```
+
+## Polling guidance
+
+- Poll `/v1/account` every **15–30 seconds** for dashboards
+- If `concurrency.available === 0`, queue or backoff before submitting more runs
+- If `wallet.available_usd` is low, top up at [Console → Billing](https://apisale.ai/console/billing)
+
+## Console alternative
+
+For UI or admin tools, use `GET /console/v1/concurrency/status` with a bearer token. See [Console limits](/console/limits).

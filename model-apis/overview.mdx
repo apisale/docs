@@ -1,0 +1,35 @@
+---
+title: Model APIs overview
+description: Unified inference API for all models in the catalog.
+---
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/v1/run/{model_slug}` | Submit a run |
+| GET | `/v1/runs/{run_id}` | Get run status |
+| POST | `/v1/runs/search` | Search runs |
+| DELETE | `/v1/runs/{run_id}` | Cancel a run |
+| POST | `/v1/pricing/preview` | Estimate cost |
+
+Model slugs match the [Explore](https://apisale.ai/explore) catalog and model detail pages.
+
+## Request shape
+
+```json
+{
+  "input": { },
+  "webhook_url": "https://optional",
+  "sync": false
+}
+```
+
+The `input` object must match the model's JSON schema (shown in each model's Playground tab).
+
+## Async vs sync
+
+- **Async (default):** returns immediately with `run_id`; poll or use webhooks
+- **Sync:** set `"sync": true` or use models with sync execution mode — blocks until complete
+
+See [Submit a run](/model-apis/submit-run) and [Poll runs](/model-apis/poll-runs).

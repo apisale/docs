@@ -1,0 +1,14 @@
+---
+title: Console vs Public APIs
+description: Choose the right authentication and base path.
+---
+
+| | Public `/v1/*` | Console `/console/v1/*` |
+|--|----------------|-------------------------|
+| **Auth** | API Key | Bearer JWT (login) |
+| **Use case** | Inference, monitoring | Dashboard, team, billing UI |
+| **Account info** | `GET /v1/account` | `GET /console/v1/dashboard` |
+| **Concurrency** | In `/v1/account` | `GET /console/v1/concurrency/status` |
+| **Wallet** | In `/v1/account` | `GET /console/v1/wallet` |
+
+Never embed Console JWTs in server workers that only need monitoring — use API keys with `/v1/account` instead.

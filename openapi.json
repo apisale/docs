@@ -1,0 +1,68 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "apisale Public API",
+    "version": "1.0.0",
+    "description": "Generative media inference and account monitoring."
+  },
+  "servers": [{ "url": "https://api.apisale.ai" }],
+  "paths": {
+    "/v1/account": {
+      "get": {
+        "summary": "Get account status",
+        "description": "Wallet balance, concurrency, and rate limits for the authenticated API key.",
+        "security": [{ "ApiKeyAuth": [] }],
+        "responses": {
+          "200": { "description": "Account snapshot" }
+        }
+      }
+    },
+    "/v1/account/keys": {
+      "get": {
+        "summary": "Per-key concurrency breakdown",
+        "security": [{ "ApiKeyAuth": [] }],
+        "responses": {
+          "200": { "description": "API key usage list" }
+        }
+      }
+    },
+    "/v1/run/{model_slug}": {
+      "post": {
+        "summary": "Submit a run",
+        "security": [{ "ApiKeyAuth": [] }],
+        "parameters": [
+          {
+            "name": "model_slug",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Run created" },
+          "429": { "description": "Concurrency or rate limit exceeded" }
+        }
+      }
+    },
+    "/v1/runs/{run_id}": {
+      "get": {
+        "summary": "Get run",
+        "security": [{ "ApiKeyAuth": [] }],
+        "parameters": [
+          { "name": "run_id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Run object" } }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Format: Key as_live_xxx"
+      }
+    }
+  }
+}

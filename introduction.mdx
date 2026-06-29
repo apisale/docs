@@ -1,0 +1,33 @@
+---
+title: Introduction
+description: Build with generative image, video, audio, and 3D models through one unified API.
+---
+
+# apisale API
+
+apisale is a generative media platform for developers. Call hundreds of models through a single API, with metered USD billing, webhooks, and a developer console.
+
+## Two API surfaces
+
+| Surface | Auth | Use for |
+|---------|------|---------|
+| **Model APIs** (`/v1/*`) | `Authorization: Key YOUR_API_KEY` | Submit runs, poll results, upload media |
+| **Console APIs** (`/console/v1/*`) | `Authorization: Bearer ACCESS_TOKEN` | Dashboard, team, billing UI integrations |
+
+For **monitoring balance and concurrency from your app**, use the Platform API: [`GET /v1/account`](/platform/account).
+
+## Base URL
+
+```
+https://api.apisale.ai
+```
+
+## Quick path
+
+1. [Create an account](https://apisale.ai/login) and [API key](https://apisale.ai/console/api-keys)
+2. [Top up balance](https://apisale.ai/console/billing)
+3. [Submit your first run](/get-started/quickstart)
+
+## Explore models
+
+Browse the [model marketplace](https://apisale.ai/explore) for slugs, pricing, and playground schemas.

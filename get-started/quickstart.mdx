@@ -1,0 +1,42 @@
+---
+title: Quickstart
+description: Run your first model in under five minutes.
+---
+
+## 1. Get an API key
+
+Sign in to the [Console](https://apisale.ai/console), open **API Keys**, and create a live key. Store it securely — it is shown only once.
+
+## 2. Submit a run
+
+```bash
+curl -X POST "https://api.apisale.ai/v1/run/fal-ai/flux/dev" \
+  -H "Authorization: Key $APISALE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "input": {
+      "prompt": "A cinematic product shot on a neon gradient desk"
+    }
+  }'
+```
+
+Replace the path segment with your model slug from [Explore](https://apisale.ai/explore).
+
+## 3. Poll for results
+
+```bash
+curl "https://api.apisale.ai/v1/runs/run_xxx" \
+  -H "Authorization: Key $APISALE_API_KEY"
+```
+
+Status progresses: `queued` → `processing` → `succeeded` or `failed`.
+
+## 4. Optional webhook
+
+Pass `webhook_url` in the submit body to receive a signed callback when the run completes. See [Webhooks](/get-started/webhooks).
+
+## Next steps
+
+- [Authentication](/get-started/authentication)
+- [Account & monitoring](/get-started/account-and-monitoring)
+- [Errors & limits](/get-started/errors-and-limits)

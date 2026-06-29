@@ -1,0 +1,24 @@
+---
+title: OpenAI compatible
+description: Drop-in image and video endpoints.
+---
+
+Point OpenAI-compatible clients at:
+
+```
+https://api.apisale.ai/v1
+```
+
+Use your apisale API key as the OpenAI API key.
+
+Supported routes include image and video generation with apisale model routing underneath. See each model page for parameters and limits.
+
+```bash
+curl "https://api.apisale.ai/v1/images/generations" \
+  -H "Authorization: Key $APISALE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "fal-ai/flux/dev",
+    "prompt": "A sunset over mountains"
+  }'
+```

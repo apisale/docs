@@ -1,0 +1,33 @@
+---
+title: GET /v1/account
+description: Platform API for wallet and concurrency monitoring.
+---
+
+<Note>
+  Requires `Authorization: Key YOUR_API_KEY`. This is the recommended endpoint for production monitoring integrations.
+</Note>
+
+## GET /v1/account
+
+Returns organization wallet, concurrency status, current key limits, and rate limit configuration.
+
+[Full reference →](/get-started/account-and-monitoring)
+
+## GET /v1/account/keys
+
+Returns per-API-key concurrency usage (`in_flight`, `limit`, `available`) for all active keys in the organization.
+
+```bash
+curl "https://api.apisale.ai/v1/account/keys" \
+  -H "Authorization: Key $APISALE_API_KEY"
+```
+
+## When to use Platform vs Console APIs
+
+| Need | Endpoint |
+|------|----------|
+| Monitor from inference workers | `GET /v1/account` |
+| Admin dashboard with user login | `GET /console/v1/dashboard` |
+| Detailed tier editing | Console only (admin) |
+
+See [Console vs Public](/platform/console-vs-public).

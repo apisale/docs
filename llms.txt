@@ -1,0 +1,9 @@
+# apisale docs index
+
+- introduction.mdx
+- get-started/quickstart.mdx
+- get-started/authentication.mdx
+- get-started/account-and-monitoring.mdx
+- get-started/errors-and-limits.mdx
+- model-apis/overview.mdx
+- platform/account.mdx

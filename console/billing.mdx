@@ -1,0 +1,18 @@
+---
+title: Billing
+description: USD wallet top-ups and payment orders.
+---
+
+[Console → Billing](https://apisale.ai/console/billing)
+
+## Wallet fields
+
+| Field | Meaning |
+|-------|---------|
+| Balance | Total USD in wallet |
+| Reserved | Pre-held for active runs |
+| Available | Balance minus reserved |
+
+Top up via packages or custom USD amounts. Usage deducts automatically when runs complete.
+
+Monitor balance programmatically with [`GET /v1/account`](/platform/account).
